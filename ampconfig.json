@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.10.3",
+  "appInfo": {
+    "name": "Crypto Investigation",
+    "description": "Crypto Investigation App",
+    "version": "p7noj2si",
+    "id": "ckxa48hqi2625151bs67g6n5cqp",
+    "url": "https://app.amplication.com/ckxa48hqi2625151bs67g6n5cqp",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "cryptoinvest",
+      "dbPassword": "admin",
+      "dbPort": 5432,
+      "dbUser": "admin",
+      "appId": "ckxa48hqi2625151bs67g6n5cqp",
+      "authProvider": "Jwt"
+    }
+  }
+}
