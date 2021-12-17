@@ -1,0 +1,69 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  cases                  Case[]
+  createdAt              DateTime             @default(now())
+  firstName              String?
+  id                     String               @id @default(cuid())
+  lastName               String?
+  password               String
+  privateInvestigators   PrivateInvestigator? @relation(fields: [privateInvestigatorsId], references: [id])
+  privateInvestigatorsId String?
+  roles                  String[]
+  updatedAt              DateTime             @updatedAt
+  username               String               @unique
+}
+
+model PrivateInvestigator {
+  code                     Int?
+  companyName              String?
+  companyRegistrationId    String?
+  createdAt                DateTime @default(now())
+  cyberSecurityExpert      String?
+  fraudInvestigationNumber String?
+  id                       String   @id @default(cuid())
+  image                    String?
+  investigatorEmail        String?
+  investigatorName         String?
+  updatedAt                DateTime @updatedAt
+  user                     User
+}
+
+model Case {
+  amount             Float?
+  blockNumber        Int?
+  createdAt          DateTime                    @default(now())
+  cryptocurrencyType EnumCaseCryptocurrencyType?
+  fromWallet         String?
+  id                 String                      @id @default(cuid())
+  keyPhrase          String?
+  privateNote        String?
+  status             EnumCaseStatus?
+  timeOfTheft        DateTime?
+  toWallet           String?
+  transactionHash    String?
+  user               User?                       @relation(fields: [userId], references: [id])
+  userId             String?
+}
+
+enum EnumCaseCryptocurrencyType {
+  Bitcoin
+  Ethereum
+  Litecoin
+  Dogecoin
+  Ripple
+  Shiba
+}
+
+enum EnumCaseStatus {
+  Processing
+  Completed
+  Failed
+}
